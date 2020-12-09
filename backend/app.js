@@ -3,7 +3,7 @@ const express = require("express");
 const colors = require("colors");
 const productRouter = require("./routes/productRoutes.js");
 const globalErrorhandler = require("./Controllers/errorController");
-
+const AppError = require("./utils/AppError");
 const app = express();
 app.use(express.json());
 app.use(productRouter);
