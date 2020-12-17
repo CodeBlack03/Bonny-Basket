@@ -5,7 +5,7 @@ mongoose.Promise = global.Promise;
 
 // Connect MongoDB at default port 27017.
 mongoose.connect(
-  "mongodb+srv://CodeBlack03:heropanti003@codeblack03.furnw.mongodb.net/Bonny-BasketDb?retryWrites=true&w=majority",
+  process.env.MONGO_URI,
   {
     useNewUrlParser: true,
     useCreateIndex: true,
