@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
 import { Container } from "react-bootstrap";
 import HomeScreen from "./screens/HomeScreen.js";
+
 import ProductScreen from "./screens/ProductScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
@@ -35,12 +36,30 @@ function App() {
             <Route path="/profile" component={ProfileScreen} />
             <Route path="/login" component={LoginScreen} />
             <Route path="/" component={HomeScreen} exact />
+            <Route path="/search/:keyword" component={HomeScreen} exact />
+            <Route path="/page/:page" component={HomeScreen} exact />
+            <Route
+              path="/search/:keyword/page/:page"
+              component={HomeScreen}
+              exact
+            />
+
             <Route path="/products/:id" component={ProductScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/admin/userlist" component={UserListScreen} />
 
             <Route path="/admin/user/:id/edit" component={UserEditScreen} />
-            <Route path="/admin/productlist" component={ProductListScreen} />
+            <Route
+              path="/admin/productlist"
+              component={ProductListScreen}
+              exact
+            />
+            <Route
+              path="/admin/productlist/:page"
+              component={ProductListScreen}
+              exact
+            />
+
             <Route
               path="/admin/product/:id/edit"
               component={ProductEditScreen}

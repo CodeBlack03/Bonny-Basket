@@ -9,6 +9,10 @@ const reviewSchema = new mongoose.Schema(
       required: true,
       ref: "User",
     },
+    name: {
+      type: String,
+      required: true,
+    },
     rating: {
       type: Number,
       required: true,
@@ -18,9 +22,14 @@ const reviewSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
   },
-  { timeStamp: true }
+  { timeStamps: true }
 );
+const Review = mongoose.model("Review", reviewSchema);
 
 const productSchema = new mongoose.Schema({
   user: {
@@ -31,7 +40,7 @@ const productSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
+
     index: true,
   },
   image: {
@@ -79,4 +88,4 @@ const productSchema = new mongoose.Schema({
 
 //Export the model
 const Product = mongoose.model("Product", productSchema);
-module.exports = Product;
+module.exports = { Product, Review };

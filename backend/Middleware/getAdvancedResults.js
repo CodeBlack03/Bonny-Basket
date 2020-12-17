@@ -17,18 +17,25 @@ advancedResults = (Model, populate) =>
 
     queryStr = JSON.parse(queryStr);
     // console.log(queryStr);
-    if (req.params.tourId) {
-      queryStr = { ...queryStr, tour: req.params.tourId };
-    }
-    let query = Model.find(queryStr);
+    const keyword = queryStr.keyword
+      ? {
+          name: {
+            $regex: req.query.keyword,
+            $options: "i",
+          },
+        }
+      : {};
+
+    let query = Model.find({ ...keyword });
 
     const pagination = {};
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
+    const limit = parseInt(req.query.limit) || 3;
 
-    const totalDocuments = await Model.countDocument;
+    const totalDocuments = await Model.countDocuments({ ...keyword });
     const firstPage = (page - 1) * limit;
     const lastPage = page * limit;
+
     if (firstPage > 0) {
       pagination.pre = {
         page: page - 1,
@@ -66,7 +73,10 @@ advancedResults = (Model, populate) =>
     res.advancedResults = {
       success: true,
       count: result.length,
-      pagination,
+      pagination: {
+        page,
+        pages: Math.ceil(totalDocuments / limit),
+      },
       data: result,
     };
     next();

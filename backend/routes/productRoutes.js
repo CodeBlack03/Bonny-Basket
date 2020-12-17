@@ -1,6 +1,8 @@
 const express = require("express");
 
 const router = express.Router();
+const advancedResults = require("../Middleware/getAdvancedResults");
+const { Product } = require("../models/Product");
 const productController = require("../Controllers/productController.js");
 const authController = require("../Controllers/authController");
 // @desc Fetch all products
@@ -8,12 +10,17 @@ const authController = require("../Controllers/authController");
 // @access Public
 router
   .route("/")
-  .get(productController.getProducts)
+  .get(advancedResults(Product), productController.getProducts)
   .post(
     authController.protect,
     authController.restrictTo(),
     productController.createProduct
   );
+router
+  .route("/:id/reviews")
+  .post(authController.protect, productController.createProductReview);
+
+router.route("/top").get(productController.getTopProducts);
 
 // @desc Fetch single products
 // @route GET /api/products/:id
