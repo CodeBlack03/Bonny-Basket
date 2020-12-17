@@ -20,6 +20,7 @@ const ProductScreen = ({ history, match }) => {
   const dispatch = useDispatch();
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
+  console.log(product);
   useEffect(() => {
     dispatch(listProductDetails(match.params.id));
   }, [dispatch, match]);
@@ -40,6 +41,7 @@ const ProductScreen = ({ history, match }) => {
       ) : (
         <Row>
           <Col md={6}>
+            {console.log("Product", product.image)}
             <Image fluid src={product.image} alt={product.name} />
           </Col>
           <Col md={3}>

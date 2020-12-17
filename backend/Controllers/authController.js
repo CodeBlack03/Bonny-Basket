@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const AppError = require("../utils/AppError");
 const catchAsync = require("../utils/catchAsync");
+const factory = require("./factory");
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_TOKEN_SECRET, {
@@ -181,3 +182,17 @@ exports.getProfile = catchAsync(async (req, res, next) => {
     return next(new AppError("User not found", 404));
   }
 });
+
+exports.restrictTo = () =>
+  catchAsync(async (req, res, next) => {
+    if (!req.user.isAdmin) {
+      return next(new AppError("You are not authorized for this request", 401));
+    }
+    next();
+  });
+
+exports.getUsers = factory.getAll(User);
+exports.getUser = factory.getOne(User);
+exports.updateUser = factory.updateOne(User);
+exports.createUser = factory.createOne(User);
+exports.deleteUser = factory.deleteOne(User);

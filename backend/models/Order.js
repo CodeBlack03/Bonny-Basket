@@ -49,6 +49,11 @@ var orderSchema = new mongoose.Schema(
       update_time: { type: String },
       email_address: { type: String },
     },
+    itemsPrice: {
+      type: Number,
+      required: true,
+      default: 0.0,
+    },
     taxPrice: {
       type: Number,
       required: true,
@@ -77,15 +82,15 @@ var orderSchema = new mongoose.Schema(
       required: true,
       default: false,
     },
-    delieveredAt: {
+    deliveredAt: {
       type: Date,
     },
   },
   {
-    timestamps: "true",
+    timestamps: true,
   }
 );
 
 //Export the model
-const Order = mongoose.model("Order", userSchema);
+const Order = mongoose.model("Order", orderSchema);
 module.exports = Order;

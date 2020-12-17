@@ -3,7 +3,7 @@ const colors = require("colors");
 const catchAsync = require("../utils/catchAsync");
 const Product = require("../models/Product");
 const AppError = require("../utils/AppError");
-
+const factory = require("../Controllers/factory");
 exports.getProducts = catchAsync(async (req, res, next) => {
   const products = await Product.find({});
 
@@ -20,3 +20,7 @@ exports.getProductById = catchAsync(async (req, res, next) => {
   }
   res.status(200).json(product);
 });
+
+exports.deleteProduct = factory.deleteOne(Product);
+exports.createProduct = factory.createOne(Product);
+exports.updateProduct = factory.updateOne(Product);
