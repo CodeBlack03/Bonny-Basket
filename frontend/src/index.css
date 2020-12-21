@@ -1,6 +1,10 @@
 main {
   min-height: 80vh;
 }
+body {
+  background-color: #e6e6e6;
+  background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+}
 h1 {
   font-size: 1.8rem;
   padding: 1rem 0;
@@ -16,6 +20,34 @@ h3 {
   margin: 0.1rem;
 }
 
+@media (max-width: 900px) {
+  .carousel-caption h2 {
+    color: #fff;
+    font-size: 12.5px !important;
+  }
+  .carousel-image {
+    height: 150px !important;
+    /* width: 250px; */
+    padding: 20px;
+    margin: 40px;
+    border-radius: 50%;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 900px) {
+  .carousel-caption h2 {
+    color: #fff;
+    font-size: medium;
+  }
+  .carousel-image {
+    height: 250px !important;
+    /* width: 250px; */
+    padding: 20px;
+    margin: 20px;
+    border-radius: 50%;
+  }
+}
+
 .carousel-item-next,
 .carousel-item-prev,
 .carousel-item.active {
@@ -25,6 +57,7 @@ h3 {
   position: absolute;
   top: 0;
 }
+
 .carousel-caption h2 {
   color: #fff;
 }
